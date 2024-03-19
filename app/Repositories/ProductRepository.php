@@ -18,7 +18,39 @@ class ProductRepository
         $take = $request->input('take', 10);
         $skip = $request->input('skip', 0);
 
+        if ($request->has('order')) {
+            $order = $request->query('order');
+            if ($order === 'latest') {
+                $query->latest();
+            } elseif ($order === 'oldest') {
+                $query->oldest();
+            }
+        }
+
         return $query->take($take)->skip($skip)->get();
+    }
+
+    public function available(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->has('search')) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+
+        $take = $request->input('take', 10);
+        $skip = $request->input('skip', 0);
+
+        if ($request->has('order')) {
+            $order = $request->query('order');
+            if ($order === 'latest') {
+                $query->latest();
+            } elseif ($order === 'oldest') {
+                $query->oldest();
+            }
+        }
+
+        return $query->where('quantity', '>', 0)->take($take)->skip($skip)->get();
     }
 
     public function store(Request $request)

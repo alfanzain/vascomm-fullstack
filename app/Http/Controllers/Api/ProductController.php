@@ -28,6 +28,25 @@ class ProductController extends Controller
         }
     }
 
+    public function available(ProductRepository $productRepository, Request $request)
+    {
+        try {
+            $products = $productRepository->available($request);
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'Get products success',
+                'data' => $products
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'message' => 'Internal server error',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function store(ProductRepository $productRepository, Request $request)
     {
         try {

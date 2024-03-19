@@ -22,11 +22,12 @@ Route::prefix('v1')
             });
         });
 
+        Route::get('/products', [ProductController::class, 'index']);
+        Route::get('/products/available', [ProductController::class, 'available']);
+
         Route::prefix('products')
             ->middleware('auth:api')
             ->group(function () {
-                Route::get('/', [ProductController::class, 'index'])
-                    ->middleware('role:admin,user');
                 Route::get('/{product}', [ProductController::class, 'show'])
                     ->middleware('role:admin,user');
                 Route::post('/', [ProductController::class, 'store'])
