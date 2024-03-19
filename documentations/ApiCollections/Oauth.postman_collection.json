@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "466477c6-b998-44f0-b588-344d43c76360",
+		"name": "Oauth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15484583"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@example.com\",\r\n    \"password\": 12345678,\r\n    \"password_confirmation\": 12345678,\r\n    \"role\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_V1_BASE_URL}}/auth/register",
+					"host": [
+						"{{API_V1_BASE_URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\",\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": 12345678,\r\n    \"password_confirmation\": 12345678,\r\n    \"role\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_V1_BASE_URL}}/auth/register",
+							"host": [
+								"{{API_V1_BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 19 Mar 2024 05:32:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"name\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"role\": 1,\n        \"updated_at\": \"2024-03-19T05:32:18.000000Z\",\n        \"created_at\": \"2024-03-19T05:32:18.000000Z\",\n        \"id\": 1\n    }\n}"
+				},
+				{
+					"name": "Register user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@example.com\",\r\n    \"password\": 12345678,\r\n    \"password_confirmation\": 12345678,\r\n    \"role\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_V1_BASE_URL}}/auth/register",
+							"host": [
+								"{{API_V1_BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 19 Mar 2024 07:04:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"name\": \"user\",\n        \"email\": \"user@example.com\",\n        \"role\": 2,\n        \"updated_at\": \"2024-03-19T07:04:58.000000Z\",\n        \"created_at\": \"2024-03-19T07:04:58.000000Z\",\n        \"id\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Extract token and save to variable\", function () {\r",
+							"    // Pastikan respons memiliki status kode 200 OK\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"    // Ekstrak token dari respons JSON\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var token = jsonData.data.token;\r",
+							"\r",
+							"    pm.globals.set(\"TOKEN\", token);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": 12345678\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_V1_BASE_URL}}/auth/login",
+					"host": [
+						"{{API_V1_BASE_URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": 12345678\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_V1_BASE_URL}}/auth/login",
+							"host": [
+								"{{API_V1_BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 19 Mar 2024 05:46:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": \"Login successfully\",\n    \"data\": {\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGFjYTM1YjIzMjIyMmY5YThlYTMwODVmODNkMDc4Y2UwMGRlOTFjYjA2ZTYyYzk5NjRiMGRkNjAzOTMyMjk0ZjY1ZTAwYzkxODY0MGEwNzQiLCJpYXQiOjE3MTA4MjcyMTguNzQ0MjQyLCJuYmYiOjE3MTA4MjcyMTguNzQ0MjQ0LCJleHAiOjE3NDIzNjMyMTguNzI1OTU0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Mc8DoQZUsZsMu_61rk761o7lYWKZGcCspVKRb2UCDGY6HpGkPOTjGVykc7e0P0po4aGwauv4fTq-ENBJcA3gs3Cg-xLsVXYhv7Sk8Rv4o3AdQESyxS5P-7IJGz1vU0fnFoHaNcL2TqzTALoTIkk_cSAEyH0SOFatldBnHK2XBUafmkotikMpNerGHNKt6jCwyFIACwFB8GnoTEqdUz8T-EDsEUNzRIuw0VjrbOjHtViepYJfiYSpMpp6PMegDefZeBjs0hVovx4L76iIpQo6q6S7QLeFtVCJJLaBKlCMFldsJcaJyYZvKD32MSOQdvCQ60koO3rnSkSJyVqEGD5eu0tXPynxVnU4IL0dsI35DzgoCX_o1YMaYa7ZCM88XtB3mbv5SpzPFrsL3Z0Uo01D6K7LLexx2wlZq8EFO4_CtuBPUfbzmki5OlXRbiI6N5EBtNjyDCKlLum2JdplARGj3S2j0pWocOo1iN_cjep6v-l060uhYVI1m23953qU5WgFTfyub3t1EBGwvNVceai_iW63tM4MwKN9VyY6i-s6iPB1upnqF1PymkXWEewr8Mgg0zpffhKqJYbwwPkTLON9g97uAEJm-xKz-123RhJ9od1b1tV94CjICdXnIqDpQWp_Z7wqyq8shfeazXRzn9JG0MX_Hvg2JE0VQ72d6J3_iPo\"\n    }\n}"
+				},
+				{
+					"name": "Login user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@example.com\",\r\n    \"password\": 12345678\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_V1_BASE_URL}}/auth/login",
+							"host": [
+								"{{API_V1_BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 19 Mar 2024 07:26:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": \"Login successfully\",\n    \"data\": {\n        \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDNhNjBjMzQ2ZTFmMWNlM2RhYzQ1ZDA3Yjc2ZWVlMmZiYWNkNTZlZGM2ZDY1ZDA0ZTZhZDkwNTE1OTI1NGJmY2NiNjliMzQ0MWI2ZGZiYTUiLCJpYXQiOjE3MTA4MzMyMTQuOTczNjM5LCJuYmYiOjE3MTA4MzMyMTQuOTczNjQ0LCJleHAiOjE3NDIzNjkyMTQuOTY3Niwic3ViIjoiMSIsInNjb3BlcyI6W119.nxdP8bBSyGg5Nt3KTZy1rZf3Ygu400WfMg2hgTvdU3o_i5YCcLC1da4TqtNfPaUUiwUtz_a54H6Z8erXgjgKWc458f0MR3H0ZHyS95d4jyTPOQ1r-RS1MQaqfPV2KthiibwxV_Yw_XjlpokKegtkvognLugPr1Bn8qrhCuwnNUAfVrRHJI2F4nuyeT9IKCNOyWgqaaAArmBXs893MTxtlrOsIgUKWUqlrSASm7SjJ4AKG4WC83UWXayRDWaUssgyUSt7XcWPXyQvk2BRoptqgq3JgcqXyAVIOiIGpAZCA2S1EOU2Mh4US7qpaaP8xMypoZPqsPMgw1kzMui6ZqTwXC8rkfY-OO3hSdEFZKUYe4Lf1PRSXC_xyW4JQXVnB_UU7ZpasPSA2fh09p9GQoEt6F5Qj5iDfl3DsTxXqa_S7kb7HyJNFCk2_EBiP2Wka04_XYzADCDOSkFmHeBXgJKlxGch7ZbUFioQQw710Lm7yqNuA65UHGXZBiZsc01XtgWHbR60wOMZv0CEO5mgecTn3DXGKG0J-SJzWGxVrmnxXRY0R6gd1R1S3d5Y661lVWO5s4H2HS-gtp7w6DvYR-fBxGIG8BFwDfi1be4g-hCScPlpONU98TtXT8XLjNy4beBxP5UfeolSH9MrRIRcWCiiqKpQxIZ5BeYCgUj9hSScR2U\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGFjYTM1YjIzMjIyMmY5YThlYTMwODVmODNkMDc4Y2UwMGRlOTFjYjA2ZTYyYzk5NjRiMGRkNjAzOTMyMjk0ZjY1ZTAwYzkxODY0MGEwNzQiLCJpYXQiOjE3MTA4MjcyMTguNzQ0MjQyLCJuYmYiOjE3MTA4MjcyMTguNzQ0MjQ0LCJleHAiOjE3NDIzNjMyMTguNzI1OTU0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Mc8DoQZUsZsMu_61rk761o7lYWKZGcCspVKRb2UCDGY6HpGkPOTjGVykc7e0P0po4aGwauv4fTq-ENBJcA3gs3Cg-xLsVXYhv7Sk8Rv4o3AdQESyxS5P-7IJGz1vU0fnFoHaNcL2TqzTALoTIkk_cSAEyH0SOFatldBnHK2XBUafmkotikMpNerGHNKt6jCwyFIACwFB8GnoTEqdUz8T-EDsEUNzRIuw0VjrbOjHtViepYJfiYSpMpp6PMegDefZeBjs0hVovx4L76iIpQo6q6S7QLeFtVCJJLaBKlCMFldsJcaJyYZvKD32MSOQdvCQ60koO3rnSkSJyVqEGD5eu0tXPynxVnU4IL0dsI35DzgoCX_o1YMaYa7ZCM88XtB3mbv5SpzPFrsL3Z0Uo01D6K7LLexx2wlZq8EFO4_CtuBPUfbzmki5OlXRbiI6N5EBtNjyDCKlLum2JdplARGj3S2j0pWocOo1iN_cjep6v-l060uhYVI1m23953qU5WgFTfyub3t1EBGwvNVceai_iW63tM4MwKN9VyY6i-s6iPB1upnqF1PymkXWEewr8Mgg0zpffhKqJYbwwPkTLON9g97uAEJm-xKz-123RhJ9od1b1tV94CjICdXnIqDpQWp_Z7wqyq8shfeazXRzn9JG0MX_Hvg2JE0VQ72d6J3_iPo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_V1_BASE_URL}}/auth/logout",
+					"host": [
+						"{{API_V1_BASE_URL}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
