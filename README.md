@@ -24,14 +24,23 @@ SOAL :
 ## Commands
 
 composer create-project laravel/laravel:^11.0 .
+
 php artisan install:api --passport
+
 <!-- php artisan passport:keys -->
+
 php artisan passport:client --personal
+
 php artisan storage:link
+
 
 # Installation
 
 composer install
+
 php artisan migrate --seed
+
 php artisan passport:client --personal
+
 php artisan storage:link
+
