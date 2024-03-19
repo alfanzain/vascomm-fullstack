@@ -4,16 +4,24 @@ Buatlah API dengan menggunakan Javasccript (Next/Express) / PHP (Lumen) yang dap
 - CRUD data produk 
 
 SOAL :  
-- [v] Fitur get list terdapat param query take, skip search. (point : 10)
-- [v] Menggunakan method yang sesuai. (point : 10) 
-- [v] Format respon terdiri dari : code, message, data. (point : 10) 
-- [v] Implementasi oauth2 pada API. (point : 20)
-- [v] Untuk fitur delete implementasi soft delete. (point : 10) 
-- [v] Mengimplementasikan 2 role user (role admin dan role user). (point : 10) 
-- [v] Implementasi seeder dan migration. (point : 20)
-- [v] Implementasi validasi parameter. (point : 10)
+- [x] Fitur get list terdapat param query take, skip search. (point : 10)
+- [x] Menggunakan method yang sesuai. (point : 10) 
+- [x] Format respon terdiri dari : code, message, data. (point : 10) 
+- [x] Implementasi oauth2 pada API. (point : 20)
+- [x] Untuk fitur delete implementasi soft delete. (point : 10) 
+- [x] Mengimplementasikan 2 role user (role admin dan role user). (point : 10) 
+- [x] Implementasi seeder dan migration. (point : 20)
+- [x] Implementasi validasi parameter. (point : 10)
 
 # Development
+
+## Techs
+- Laravel 11
+- PHP 8.3
+- Javascript
+- MySQL
+
+## Commands
 
 composer create-project laravel/laravel:^11.0 .
 php artisan install:api --passport
